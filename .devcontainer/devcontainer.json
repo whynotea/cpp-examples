@@ -1,0 +1,18 @@
+{
+  "image": "ghcr.io/whynotea/devcontainer-cpp:latest",
+  "features": {},
+  "runArgs": [
+    "--security-opt",
+    "label=disable",
+    "--device",
+    "/dev/fuse",
+    "--userns=keep-id"
+  ],
+  "customizations": {
+    "vscode": {
+      "settings": {},
+      "extensions": []
+    }
+  },
+  "remoteUser": "code"
+}
