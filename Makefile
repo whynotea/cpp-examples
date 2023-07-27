@@ -11,6 +11,7 @@ container-build:
 
 .PHONY: build-local
 build-local:
+	ls -alh && \
 	mkdir -p build
 	bash -c "cd ./build &&\
         cmake .. &&\
