@@ -11,7 +11,7 @@ container-build:
 
 .PHONY: build-local
 build-local:
-  id
+	id
 	ls -alh
 	mkdir -p build
 	bash -c "cd ./build &&\
