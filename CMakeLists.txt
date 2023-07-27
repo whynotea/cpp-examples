@@ -1,0 +1,51 @@
+cmake_minimum_required(VERSION 3.27.0)
+project(cpp-examples VERSION 0.0.1)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+include(CTest)
+enable_testing()
+
+find_package(Git QUIET)
+if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
+  option(GIT_SUBMODULE "Check submodules during build" ON)
+  if(GIT_SUBMODULE)
+    message(STATUS "Submodule update")
+    execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive
+                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                    RESULT_VARIABLE GIT_SUBMOD_RESULT)
+    if(NOT GIT_SUBMOD_RESULT EQUAL "0")
+      message(FATAL_ERROR "git submodule update --init failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
+    endif()
+  endif()
+endif()
+
+if(NOT EXISTS "${PROJECT_SOURCE_DIR}/external/glfw/CMakeLists.txt")
+  message(FATAL_ERROR "The glfw submodules was not downloaded! GIT_SUBMODULE was turned off or failed. Please update submodules and try again.")
+endif()
+
+add_subdirectory(src/bin/basic)
+add_subdirectory(src/lib/adder)
+add_subdirectory(src/bin/basic-gui)
+add_subdirectory(external/glfw)
+
+target_include_directories(basic 
+  PUBLIC src/lib/adder
+)
+target_link_libraries(basic
+  PRIVATE adder
+  PRIVATE -static-libgcc
+  PRIVATE -static-libstdc++
+)
+
+target_include_directories(basic-gui
+  PUBLIC external/glfw/include
+)
+target_link_libraries(basic-gui
+  PRIVATE glfw
+  PRIVATE -static-libgcc
+  PRIVATE -static-libstdc++
+)
+
+set(CPACK_PROJECT_NAME ${PROJECT_NAME})
+set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
+include(CPack)
