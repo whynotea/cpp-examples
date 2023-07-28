@@ -10,8 +10,8 @@ container-build:
 	echo "Pre-Container"
 	id
 	ls -alh
-	podman run --rm -it -v "$$(pwd):/workspace" -w /workspace ghcr.io/whynotea/devcontainer-cpp:latest make
-	echo "Post-Container"
+	podman run -u root --rm -it -v "$$(pwd):/workspaces/cpp-examples" -w /workspaces/cpp-examples ghcr.io/whynotea/devcontainer-cpp:latest make
+	# echo "Post-Container"
 
 .PHONY: build-local
 build-local:
