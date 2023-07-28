@@ -1,7 +1,10 @@
 #include <iostream>
 #include <string>
-#include <adder.h>
 #include <version.h>
+
+#ifdef USE_ADDER
+  #include <adder.h>
+#endif
 
 using namespace std;
 
@@ -12,7 +15,12 @@ int main(int argc, char* argv[])
   cout << base_name(argv[0]) << "Version " << CPP_EXAMPLES_VERSION_MAJOR << "." << CPP_EXAMPLES_VERSION_MINOR << "." << CPP_EXAMPLES_VERSION_PATCH << "\n";
   cout << "Hello, World!"
        << "\n";
-  cout << "1 + 1 = " << add(1.0f, 1.0f) << "\n";
+  #ifdef USE_ADDER
+    cout << "Using Adder Library" << "\n";
+    cout << "1 + 1 = " << add(1.0f, 1.0f) << "\n";
+  #else
+    cout << "Not using Adder Library" << "\n";
+  #endif
 
   return EXIT_SUCCESS;
 }

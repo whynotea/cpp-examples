@@ -25,17 +25,25 @@ endif()
 
 configure_file(src/config/version.h.in version.h)
 
+# Optional Adder library
+option(USE_ADDER "A basic library example" ON)
+
+if(USE_ADDER)
+  add_subdirectory(src/lib/adder)
+  list(APPEND BASIC_EXTRA_INCLUDE_DIRS PUBLIC "src/lib/adder")
+  list(APPEND BASIC_EXTRA_LINK_LIBS PRIVATE adder)
+endif()
+
 add_subdirectory(src/bin/basic)
-add_subdirectory(src/lib/adder)
 add_subdirectory(src/bin/basic-gui)
 add_subdirectory(external/glfw)
 
 target_include_directories(basic
   PUBLIC ${PROJECT_BINARY_DIR}
-  PUBLIC src/lib/adder
+  ${BASIC_EXTRA_INCLUDE_DIRS}
 )
 target_link_libraries(basic
-  PRIVATE adder
+  ${BASIC_EXTRA_LINK_LIBS}
   PRIVATE -static-libgcc
   PRIVATE -static-libstdc++
 )

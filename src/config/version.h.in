@@ -1,3 +1,5 @@
 #define CPP_EXAMPLES_VERSION_MAJOR @cpp-examples_VERSION_MAJOR@
 #define CPP_EXAMPLES_VERSION_MINOR @cpp-examples_VERSION_MINOR@
 #define CPP_EXAMPLES_VERSION_PATCH @cpp-examples_VERSION_PATCH@
+
+#cmakedefine USE_ADDER

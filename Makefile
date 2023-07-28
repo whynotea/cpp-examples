@@ -13,7 +13,7 @@ container-build:
 build-local:
 	mkdir -p build
 	bash -c "cd ./build &&\
-        cmake .. &&\
+        cmake .. -DUSE_ADDER=OFF &&\
         make"
 
 .PHONY: image
