@@ -31,8 +31,11 @@
 *.out
 *.app
 
-# Build
+# Local build dir created by cmake --build
 /build
 
-# Local install dir
+# Local install dir created by cmake --install
 /install
+
+# Local release dir created by cpack
+/release

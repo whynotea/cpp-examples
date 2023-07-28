@@ -5,6 +5,7 @@ default: all
 all: 
 	@$(MAKE) build-local
 	@$(MAKE) install-local
+	@$(MAKE) cpack
 
 .PHONY: container-build
 container-build:
@@ -37,7 +38,13 @@ install-local:
 install:
 	cmake --install build
 
+.PHONY: cpack
+cpack:
+	mkdir -p release
+	bash -c 'cd build && cpack -B ../release'
+
 .PHONY: clean
 clean:
 	rm -rf ./build
 	rm -rf ./install
+	rm -rf ./release
