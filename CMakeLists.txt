@@ -23,6 +23,8 @@ if(NOT EXISTS "${PROJECT_SOURCE_DIR}/external/glfw/CMakeLists.txt")
   message(FATAL_ERROR "The glfw submodules was not downloaded! GIT_SUBMODULE was turned off or failed. Please update submodules and try again.")
 endif()
 
+find_package(GLEW REQUIRED)
+
 configure_file(src/config/version.h.in version.h)
 
 # Optional Adder library
@@ -53,6 +55,9 @@ target_include_directories(basic-gui
 )
 target_link_libraries(basic-gui
   PRIVATE glfw
+  PRIVATE GL
+  PRIVATE GLEW
+  PRIVATE GLU
   PRIVATE -static-libgcc
   PRIVATE -static-libstdc++
 )
