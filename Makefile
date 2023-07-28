@@ -7,10 +7,15 @@ all:
 
 .PHONY: container-build
 container-build:
-	podman run --rm -it -v "$$(pwd):/workspace" -w /workspace --userns=keep-id --security-opt label=disable ghcr.io/whynotea/devcontainer-cpp:latest make
+	echo "Pre-Container"
+	id
+	ls -alh
+	podman run --rm -it -v "$$(pwd):/workspace" -w /workspace ghcr.io/whynotea/devcontainer-cpp:latest make
+	echo "Post-Container"
 
 .PHONY: build-local
 build-local:
+	echo "In Container"
 	id
 	ls -alh
 	mkdir -p build
