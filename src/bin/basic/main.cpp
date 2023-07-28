@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <adder.h>
-#include <cpp-examples-config.h>
+#include <version.h>
 
 using namespace std;
 
