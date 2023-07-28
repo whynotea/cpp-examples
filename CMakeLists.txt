@@ -1,4 +1,6 @@
 cmake_minimum_required(VERSION 3.27.0)
+set(CMAKE_TOOLCHAIN_FILE /usr/local/vcpkg/scripts/buildsystems/vcpkg.cmake)
+
 project(cpp-examples VERSION 0.0.1)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -24,6 +26,7 @@ if(NOT EXISTS "${PROJECT_SOURCE_DIR}/external/glfw/CMakeLists.txt")
 endif()
 
 find_package(GLEW REQUIRED)
+find_package(fmt CONFIG REQUIRED)
 
 configure_file(src/config/version.h.in version.h)
 
@@ -46,6 +49,7 @@ target_include_directories(basic
 )
 target_link_libraries(basic
   ${BASIC_EXTRA_LINK_LIBS}
+  PRIVATE fmt::fmt
   PRIVATE -static-libgcc
   PRIVATE -static-libstdc++
 )

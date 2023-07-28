@@ -13,6 +13,7 @@ container-build:
 
 .PHONY: build-local
 build-local:
+	vcpkg install fmt
 	mkdir -p build
 	cmake -S . -B build -DUSE_ADDER=OFF
 	cmake --build build

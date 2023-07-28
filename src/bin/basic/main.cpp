@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <version.h>
+#include <fmt/format.h>
 
 #ifdef USE_ADDER
   #include <adder.h>
@@ -21,6 +22,8 @@ int main(int argc, char* argv[])
   #else
     cout << "Not using Adder Library" << "\n";
   #endif
+
+  fmt::print(stdout, "Using fmt provided by vcpkg to print this statement\n");
 
   return EXIT_SUCCESS;
 }
