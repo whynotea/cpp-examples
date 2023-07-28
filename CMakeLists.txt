@@ -23,12 +23,15 @@ if(NOT EXISTS "${PROJECT_SOURCE_DIR}/external/glfw/CMakeLists.txt")
   message(FATAL_ERROR "The glfw submodules was not downloaded! GIT_SUBMODULE was turned off or failed. Please update submodules and try again.")
 endif()
 
+configure_file(src/config/version.h.in version.h)
+
 add_subdirectory(src/bin/basic)
 add_subdirectory(src/lib/adder)
 add_subdirectory(src/bin/basic-gui)
 add_subdirectory(external/glfw)
 
-target_include_directories(basic 
+target_include_directories(basic
+  PUBLIC ${PROJECT_BINARY_DIR}
   PUBLIC src/lib/adder
 )
 target_link_libraries(basic

@@ -20,6 +20,10 @@ build-local:
 image:
 	podman build -t ghcr.io/whynotea/cpp-examples:latest .
 
+.PHONY: run-local-%
+run-local-%:
+	@./build/src/bin/$*/$*
+
 .PHONY: run-%
 run-%:
 	@podman run --rm -it -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --net=host ghcr.io/whynotea/cpp-examples:latest $*
