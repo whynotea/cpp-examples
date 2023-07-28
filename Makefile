@@ -4,6 +4,7 @@ default: all
 .PHONY: all
 all: 
 	@$(MAKE) build-local
+	@$(MAKE) install-local
 
 .PHONY: container-build
 container-build:
@@ -12,9 +13,8 @@ container-build:
 .PHONY: build-local
 build-local:
 	mkdir -p build
-	bash -c "cd ./build &&\
-        cmake .. -DUSE_ADDER=OFF &&\
-        make"
+	cmake -S . -B build -DUSE_ADDER=OFF
+	cmake --build build
 
 .PHONY: image
 image:
@@ -28,6 +28,16 @@ run-local-%:
 run-%:
 	@podman run --rm -it -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --net=host ghcr.io/whynotea/cpp-examples:latest $*
 
+.PHONY: install-local
+install-local:
+	mkdir -p install
+	cmake --install build --prefix ./install
+
+.PHONY: install
+install:
+	cmake --install build
+
 .PHONY: clean
 clean:
 	rm -rf ./build
+	rm -rf ./install

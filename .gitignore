@@ -33,3 +33,6 @@
 
 # Build
 /build
+
+# Local install dir
+/install

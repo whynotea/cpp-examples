@@ -57,6 +57,8 @@ target_link_libraries(basic-gui
   PRIVATE -static-libstdc++
 )
 
+install(FILES "${PROJECT_BINARY_DIR}/version.h" DESTINATION include)
+
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
