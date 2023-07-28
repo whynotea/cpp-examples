@@ -7,17 +7,10 @@ all:
 
 .PHONY: container-build
 container-build:
-	echo "Pre-Container"
-	id
-	ls -alh
 	podman run -u root --rm -it -v "$$(pwd):/workspaces/cpp-examples" -w /workspaces/cpp-examples ghcr.io/whynotea/devcontainer-cpp:latest make
-	# echo "Post-Container"
 
 .PHONY: build-local
 build-local:
-	echo "In Container"
-	id
-	ls -alh
 	mkdir -p build
 	bash -c "cd ./build &&\
         cmake .. &&\
@@ -25,11 +18,11 @@ build-local:
 
 .PHONY: image
 image:
-	podman build -t whynotea/cpp-examples:latest .
+	podman build -t ghcr.io/whynotea/cpp-examples:latest .
 
 .PHONY: run-%
 run-%:
-	@podman run --rm -it -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --net=host whynotea/cpp-examples:latest $*
+	@podman run --rm -it -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --net=host ghcr.io/whynotea/cpp-examples:latest $*
 
 .PHONY: clean
 clean:
