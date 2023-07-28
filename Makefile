@@ -44,6 +44,10 @@ cpack:
 	mkdir -p release
 	bash -c 'cd build && cpack -B ../release'
 
+.PHONY: tag-%
+tag-%:
+	git tag -a $* HEAD
+
 .PHONY: clean
 clean:
 	rm -rf ./build
