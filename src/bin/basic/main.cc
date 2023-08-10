@@ -9,6 +9,7 @@
 #endif
 
 using namespace std;
+using namespace whynotea::cpp_examples;
 
 string base_name(string const& path);
 
@@ -21,7 +22,7 @@ int main(int argc, char* argv[]) {
 #ifdef USE_ADDER
   cout << "Using Adder Library"
        << "\n";
-  cout << "1 + 1 = " << add(1.0f, 1.0f) << "\n";
+  cout << "1 + 1 = " << adder::add(1.0f, 1.0f) << "\n";
 #else
   cout << "Not using Adder Library"
        << "\n";

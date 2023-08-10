@@ -16,7 +16,7 @@ build-local:
 	vcpkg install gtest
 	vcpkg install fmt
 	mkdir -p build
-	cmake -S . -B build -DUSE_ADDER=OFF
+	cmake -S . -B build -DUSE_ADDER=ON
 	cmake --build build
 
 .PHONY: image

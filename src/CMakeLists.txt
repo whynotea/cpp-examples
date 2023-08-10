@@ -1,0 +1,5 @@
+add_subdirectory(lib/adder)
+add_subdirectory(lib/design_patterns)
+add_subdirectory(bin/basic)
+add_subdirectory(bin/basic_gui)
+add_subdirectory(bin/design_patterns)

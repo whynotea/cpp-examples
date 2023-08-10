@@ -1,9 +1,9 @@
+#include <design_patterns/factory_method/client_code.h>
+#include <design_patterns/factory_method/concrete_creator_1.h>
+#include <design_patterns/factory_method/concrete_creator_2.h>
+
 #include <iostream>
 #include <string>
-
-#include "factory_method/client_code.h"
-#include "factory_method/concrete_creator_1.h"
-#include "factory_method/concrete_creator_2.h"
 
 using namespace whynotea::cpp_examples::design_patterns;
 using namespace std;
