@@ -6,6 +6,7 @@ all:
 	@$(MAKE) build-local
 	@$(MAKE) install-local
 	@$(MAKE) cpack
+	@$(MAKE) docs
 
 .PHONY: container-build
 container-build:
@@ -44,6 +45,10 @@ install:
 cpack:
 	mkdir -p release
 	bash -c 'cd build && cpack -B ../release'
+
+.PHONY: docs
+docs:
+	bash -c 'cd build && make doxygen'
 
 .PHONY: ctest
 ctest:

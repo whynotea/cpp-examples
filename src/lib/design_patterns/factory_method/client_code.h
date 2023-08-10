@@ -5,6 +5,8 @@
 #include "creator.h"
 
 namespace whynotea::cpp_examples::design_patterns::factory_method {
+
+/// @param creator The concrete creator implementing the factory method
 void ClientCode(const Creator& creator) {
   std::cout
       << "Client: I'm not aware of the creator's class, but it still works.\n"
