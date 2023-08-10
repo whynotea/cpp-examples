@@ -1,2 +1,2 @@
-add_executable(basic main.cpp)
+add_executable(basic main.cc)
 install(TARGETS basic DESTINATION bin)

@@ -1,0 +1,17 @@
+// cSpell Settings
+{
+  "enabled": true,
+  "words": [
+    "CPACK",
+    "GLEW",
+    "glfw",
+    "gtest",
+    "libstdc",
+    "STRNE",
+    "vcpkg",
+    "whynotea"
+  ],
+  "enableFiletypes": [
+    "cmake"
+  ]
+}

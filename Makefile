@@ -13,6 +13,7 @@ container-build:
 
 .PHONY: build-local
 build-local:
+	vcpkg install gtest
 	vcpkg install fmt
 	mkdir -p build
 	cmake -S . -B build -DUSE_ADDER=OFF
@@ -43,6 +44,10 @@ install:
 cpack:
 	mkdir -p release
 	bash -c 'cd build && cpack -B ../release'
+
+.PHONY: ctest
+ctest:
+	bash -c 'cd build && ctest'
 
 .PHONY: tag-%
 tag-%:

@@ -1,4 +1,9 @@
 {
   "cmake.sourceDirectory": "/workspaces/cpp-examples",
   "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+  "C/C++ Include Guard.Prefix": "WHYNOTEA_CPP_EXAMPLES_",
+  "C/C++ Include Guard.Macro Type": "Filepath",
+  "C/C++ Include Guard.Path Skip": 2,
+  "C/C++ Include Guard.Remove Extension": false,
+  "C/C++ Include Guard.Comment Style": "Line",
 }

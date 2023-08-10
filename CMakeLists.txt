@@ -40,8 +40,10 @@ if(USE_ADDER)
 endif()
 
 add_subdirectory(src/bin/basic)
-add_subdirectory(src/bin/basic-gui)
+add_subdirectory(src/bin/basic_gui)
+add_subdirectory(src/bin/design_patterns)
 add_subdirectory(external/glfw)
+add_subdirectory(tests)
 
 target_include_directories(basic
   PUBLIC ${PROJECT_BINARY_DIR}
@@ -54,14 +56,22 @@ target_link_libraries(basic
   PRIVATE -static-libstdc++
 )
 
-target_include_directories(basic-gui
+target_include_directories(basic_gui
   PUBLIC external/glfw/include
 )
-target_link_libraries(basic-gui
+target_link_libraries(basic_gui
   PRIVATE glfw
   PRIVATE GL
   PRIVATE GLEW
   PRIVATE GLU
+  PRIVATE -static-libgcc
+  PRIVATE -static-libstdc++
+)
+
+target_include_directories(design_patterns
+  PUBLIC ${PROJECT_BINARY_DIR}
+)
+target_link_libraries(design_patterns
   PRIVATE -static-libgcc
   PRIVATE -static-libstdc++
 )

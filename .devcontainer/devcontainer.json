@@ -1,5 +1,5 @@
 {
-  "image": "ghcr.io/whynotea/devcontainer-cpp:latest",
+  "image": "ghcr.io/whynotea/devcontainer-cpp:v1.0.0",
   "features": {},
   "runArgs": [
     "--security-opt",

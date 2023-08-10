@@ -1,23 +1,27 @@
-#include <iostream>
-#include <string>
-
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include <iostream>
+#include <string>
+
 using namespace std;
 
-void PrintOpenGLErrors(char const *const Function, char const *const File, int const Line)
-{
+void PrintOpenGLErrors(char const *const Function, char const *const File,
+                       int const Line) {
   bool Succeeded = true;
 
   GLenum Error = glGetError();
-  if (Error != GL_NO_ERROR)
-  {
+  if (Error != GL_NO_ERROR) {
     char const *ErrorString = (char const *)gluErrorString(Error);
     if (ErrorString)
-      std::cerr << ("OpenGL Error in %s at line %d calling function %s: '%s'", File, Line, Function, ErrorString) << std::endl;
+      std::cerr << ("OpenGL Error in %s at line %d calling function %s: '%s'",
+                    File, Line, Function, ErrorString)
+                << std::endl;
     else
-      std::cerr << ("OpenGL Error in %s at line %d calling function %s: '%d 0x%X'", File, Line, Function, Error, Error) << std::endl;
+      std::cerr
+          << ("OpenGL Error in %s at line %d calling function %s: '%d 0x%X'",
+              File, Line, Function, Error, Error)
+          << std::endl;
   }
 }
 
@@ -27,41 +31,34 @@ void PrintOpenGLErrors(char const *const Function, char const *const File, int c
 #define CheckedGLCall(x) (x)
 #define CheckExistingErrors(x)
 
-void PrintShaderInfoLog(GLint const Shader)
-{
+void PrintShaderInfoLog(GLint const Shader) {
   int InfoLogLength = 0;
   int CharsWritten = 0;
 
   glGetShaderiv(Shader, GL_INFO_LOG_LENGTH, &InfoLogLength);
 
-  if (InfoLogLength > 0)
-  {
+  if (InfoLogLength > 0) {
     GLchar *InfoLog = new GLchar[InfoLogLength];
     glGetShaderInfoLog(Shader, InfoLogLength, &CharsWritten, InfoLog);
-    std::cout << "Shader Info Log:" << std::endl
-              << InfoLog << std::endl;
+    std::cout << "Shader Info Log:" << std::endl << InfoLog << std::endl;
     delete[] InfoLog;
   }
 }
 
-int main()
-{
+int main() {
   GLFWwindow *window;
 
-  if (!glfwInit())
-    return -1;
+  if (!glfwInit()) return -1;
 
   window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
-  if (!window)
-  {
+  if (!window) {
     glfwTerminate();
     return -1;
   }
   glfwMakeContextCurrent(window);
 
   GLenum err = glewInit();
-  if (GLEW_OK != err)
-  {
+  if (GLEW_OK != err) {
     std::cerr << "Error: " << glewGetErrorString(err) << std::endl;
     glfwTerminate();
     return -1;
@@ -85,13 +82,9 @@ int main()
 		}
 	)GLSL";
 
-  GLfloat const Vertices[] = {
-      0.0f, 0.5f,
-      0.5f, -0.5f,
-      -0.5f, -0.5f};
+  GLfloat const Vertices[] = {0.0f, 0.5f, 0.5f, -0.5f, -0.5f, -0.5f};
 
-  GLuint const Elements[] = {
-      0, 1, 2};
+  GLuint const Elements[] = {0, 1, 2};
 
   GLuint VAO;
   CheckedGLCall(glGenVertexArrays(1, &VAO));
@@ -100,21 +93,22 @@ int main()
   GLuint VBO;
   CheckedGLCall(glGenBuffers(1, &VBO));
   CheckedGLCall(glBindBuffer(GL_ARRAY_BUFFER, VBO));
-  CheckedGLCall(glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW));
+  CheckedGLCall(glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices,
+                             GL_STATIC_DRAW));
   CheckedGLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 
   GLuint EBO;
   CheckedGLCall(glGenBuffers(1, &EBO));
   CheckedGLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO));
-  CheckedGLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Elements), Elements, GL_STATIC_DRAW));
+  CheckedGLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Elements),
+                             Elements, GL_STATIC_DRAW));
 
   GLint Compiled;
   GLuint VertexShader = CheckedGLResult(glCreateShader(GL_VERTEX_SHADER));
   CheckedGLCall(glShaderSource(VertexShader, 1, &VertexShaderSource, NULL));
   CheckedGLCall(glCompileShader(VertexShader));
   CheckedGLCall(glGetShaderiv(VertexShader, GL_COMPILE_STATUS, &Compiled));
-  if (!Compiled)
-  {
+  if (!Compiled) {
     std::cerr << "Failed to compile vertex shader!" << std::endl;
     PrintShaderInfoLog(VertexShader);
   }
@@ -123,8 +117,7 @@ int main()
   CheckedGLCall(glShaderSource(FragmentShader, 1, &FragmentShaderSource, NULL));
   CheckedGLCall(glCompileShader(FragmentShader));
   CheckedGLCall(glGetShaderiv(FragmentShader, GL_COMPILE_STATUS, &Compiled));
-  if (!Compiled)
-  {
+  if (!Compiled) {
     std::cerr << "Failed to compile fragment shader!" << std::endl;
     PrintShaderInfoLog(FragmentShader);
   }
@@ -136,15 +129,16 @@ int main()
   CheckedGLCall(glLinkProgram(ShaderProgram));
   CheckedGLCall(glUseProgram(ShaderProgram));
 
-  GLint PositionAttribute = CheckedGLResult(glGetAttribLocation(ShaderProgram, "position"));
+  GLint PositionAttribute =
+      CheckedGLResult(glGetAttribLocation(ShaderProgram, "position"));
   CheckedGLCall(glEnableVertexAttribArray(PositionAttribute));
 
   CheckedGLCall(glBindBuffer(GL_ARRAY_BUFFER, VBO));
-  CheckedGLCall(glVertexAttribPointer(PositionAttribute, 2, GL_FLOAT, GL_FALSE, 0, 0));
+  CheckedGLCall(
+      glVertexAttribPointer(PositionAttribute, 2, GL_FLOAT, GL_FALSE, 0, 0));
   CheckedGLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 
-  while (!glfwWindowShouldClose(window))
-  {
+  while (!glfwWindowShouldClose(window)) {
     CheckedGLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
     CheckedGLCall(glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0));
 
