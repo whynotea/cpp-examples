@@ -4,9 +4,9 @@ default: all
 .PHONY: all
 all: 
 	@$(MAKE) build-local
+	@$(MAKE) docs
 	@$(MAKE) install-local
 	@$(MAKE) cpack
-	@$(MAKE) docs
 
 .PHONY: container-build
 container-build:

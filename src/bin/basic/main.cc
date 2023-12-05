@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <thread>
 
 #ifdef USE_ADDER
 #include <adder.h>
@@ -13,6 +14,15 @@ using namespace whynotea::cpp_examples;
 
 string base_name(string const& path);
 
+class thread_obj {
+ public:
+  void operator()(int x) {
+    for (int i = 0; i < x; i++) {
+      cout << "Thread using function object as callable\n";
+    }
+  }
+};
+
 int main(int argc, char* argv[]) {
   cout << base_name(argv[0]) << "Version " << CPP_EXAMPLES_VERSION_MAJOR << "."
        << CPP_EXAMPLES_VERSION_MINOR << "." << CPP_EXAMPLES_VERSION_PATCH
@@ -22,13 +32,19 @@ int main(int argc, char* argv[]) {
 #ifdef USE_ADDER
   cout << "Using Adder Library"
        << "\n";
-  cout << "1 + 1 = " << adder::add(1.0f, 1.0f) << "\n";
+  cout << "1 + 2 = " << adder::add(1.0f, 2.0f) << "\n";
 #else
   cout << "Not using Adder Library"
        << "\n";
 #endif
 
   fmt::print(stdout, "Using fmt provided by vcpkg to print this statement\n");
+
+  thread th2(thread_obj(), 3);
+
+  // auto f = [](int x) thread th3(f, 3);
+
+  th2.join();
 
   return EXIT_SUCCESS;
 }
