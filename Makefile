@@ -16,6 +16,7 @@ container-build:
 build-local:
 	vcpkg install gtest
 	vcpkg install fmt
+	vcpkg install boost-asio
 	mkdir -p build
 	cmake -S . -B build -DUSE_ADDER=ON
 	cmake --build build

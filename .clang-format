@@ -2,4 +2,6 @@
 BasedOnStyle: Google
 SeparateDefinitionBlocks: Always
 EmptyLineBeforeAccessModifier: LogicalBlock
+IndentWidth: 2
+AllowShortFunctionsOnASingleLine: False
 ---

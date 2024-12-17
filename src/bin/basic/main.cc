@@ -10,7 +10,9 @@
 #endif
 
 using namespace std;
+#ifdef USE_ADDER
 using namespace whynotea::cpp_examples;
+#endif
 
 string base_name(string const& path);
 

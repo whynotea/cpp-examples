@@ -1,4 +1,10 @@
 cmake_minimum_required(VERSION 3.27.0)
+# Set C++ standard to 20
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_COMPILER "/usr/lib64/ccache/gcc")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
+
 set(CMAKE_TOOLCHAIN_FILE /usr/local/vcpkg/scripts/buildsystems/vcpkg.cmake)
 
 project(cpp-examples VERSION 0.0.1)
@@ -23,6 +29,7 @@ endif()
 
 find_package(GLEW REQUIRED)
 find_package(fmt CONFIG REQUIRED)
+find_package(Boost REQUIRED)
 
 configure_file(src/config/version.h.in version.h)
 install(FILES "${PROJECT_BINARY_DIR}/version.h" DESTINATION include)

@@ -6,4 +6,10 @@
   "C/C++ Include Guard.Path Skip": 2,
   "C/C++ Include Guard.Remove Extension": false,
   "C/C++ Include Guard.Comment Style": "Line",
+  "C_Cpp.clang_format_fallbackStyle": "Google",
+  "editor.formatOnType": true,
+  "C_Cpp.formatting": "clangFormat",
+  "files.associations": {
+    "iostream": "cpp"
+  }
 }
